@@ -1,0 +1,76 @@
+<!-- your_app/templates/download.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Center</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1f1f1f; /* 赛博朋克风格的深色背景 */
+            color: #fff;
+        }
+
+        header {
+            background-color: #007BFF;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        main {
+            margin: 20px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #555; /* 分隔线 */
+            padding-bottom: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #444;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* 平滑过渡效果 */
+        }
+
+        a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Download Center</h1>
+    </header>
+
+    <main>
+        <ul>
+            {% for filename in file_list %}
+                <li>{{ filename }} <a href="{% url 'download_file' filename=filename %}" download>下载</a></li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
