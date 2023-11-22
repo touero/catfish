@@ -12,14 +12,16 @@
 <body>
     <header>
         <h1>Download Center</h1>
-        <h2>Limit is set to three downloads within one minute.</h2>
+        <h2>📣: Limit is set to three downloads within one minute.</h2>
     </header>
 
     <main>
         <ul>
             {% for key, value in file_dict.items %}
                 <li>
-                    <a href="{% url 'download_file' filename=key %}" download>下载</a> {{ key }}  {{ value }}
+                    <a class="a1" href="{% url 'download_file' filename=key %}" download>download</a>
+                    <a class="a2">{{ value }}</a>
+                    <a class="a3">{{ key }}</a>
                 </li>
             {% endfor %}
         </ul>
