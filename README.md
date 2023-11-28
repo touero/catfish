@@ -43,7 +43,7 @@ Whether it is a virtual environment or a formal environment, please make sure to
 easier-docker -c config.yaml
 ```
 <p align="center">
-    <img src=static/image/index_download.png alt="">
+    <img src=static/image/index.png alt="">
 </p>
 <p align="center">
     <img src=static/image/container.png alt="">
