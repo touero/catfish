@@ -10,9 +10,6 @@
     <a href="https://dataease.io/"><img src="https://img.shields.io/badge/dataease-grey" alt=""></a>
 </p>
 -->
-<p align="center">
-    <img src=static/image/index.png alt="">
-</p>
 
 ## Repository Introduction
 An easy-to-learn, lightweight, easy-to-deploy, download web page based on Django.
