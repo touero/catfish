@@ -70,7 +70,7 @@ easier-docker -c config.yaml
 
 ## Maintainers
 
-[@weiensong](https://github.com/weiensong)
+[@touero](https://github.com/touero)
 
 
 
