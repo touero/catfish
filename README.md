@@ -57,7 +57,7 @@ easier-docker -c config.yaml
 - [django](https://github.com/django/django) — The Web framework for perfectionists with deadlines.
 - [jquery](https://github.com/jquery/jquery) — jQuery JavaScript Library.
 - [toastify-js](https://github.com/apvarun/toastify-js) — Pure JavaScript library for better notification messages.
-- [easier-docker](https://github.com/weiensong/easier-docker?tab=readme-ov-file) — A python package that makes it easier for you to use local docker.
+- [easier-docker](https://github.com/touero/easier-docker?tab=readme-ov-file) — A python package that makes it easier for you to use local docker.
 
 
 ## Related Efforts
