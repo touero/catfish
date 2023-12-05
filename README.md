@@ -16,8 +16,6 @@
 
 ## Repository Introduction
 An easy-to-learn, lightweight, easy-to-deploy, download web page based on Django.
- 
-💕 If it's helpful to you or cloning it, please star it. This is maximum encouragement for open-source contributors💕
 
 ## Install
 
