@@ -8,7 +8,7 @@ ports:
 # Unix: /Users/admin/data/code_project/catfish
 # Windows: D:\code-project\catfish
 volumes:
-  D:\code-project\catfish:
+  /Users/admin/data/code_project/catfish:
     bind: /path/to/container
     mode: rw
 
