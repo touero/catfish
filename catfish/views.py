@@ -1,9 +1,11 @@
 import os
 
+from easierdocker import log
 from django.core.cache import cache
-from django.http import FileResponse, HttpResponse
+from django.core.files.storage import FileSystemStorage
+from django.http import FileResponse, HttpResponse, HttpResponseForbidden
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import Http404
 from datetime import datetime
@@ -45,3 +47,24 @@ class DownloadFileView(View):
             return response
         else:
             raise Http404
+
+
+class UploadFileView(View):
+    AUTHORIZATION_CODE = ['223366']
+
+    @staticmethod
+    def post(request):
+        if request.POST.get('authorization_code') not in UploadFileView.AUTHORIZATION_CODE:
+            return HttpResponseForbidden("Forbidden: Invalid Authorization Code")
+
+        if not request.FILES.get('file'):
+            return HttpResponseForbidden("Forbidden: Invalid file")
+
+        if request.FILES['file']:
+            uploaded_file = request.FILES['file']
+            fs = FileSystemStorage()
+            log(uploaded_file.name)
+            fs.save(uploaded_file.name, uploaded_file)
+            return redirect('list_files')
+
+        return render(request, 'download.html')
