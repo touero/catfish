@@ -23,4 +23,6 @@ class CatfishMiddleware:
             if elapsed_time < 2:
                 return HttpResponseForbidden("Forbidden: Too many requests from this IP")
         self.requests[ip_address] = time.time()
+
+        response = self.get_response(request)
         return response
