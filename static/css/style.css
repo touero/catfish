@@ -13,13 +13,13 @@ header {
     border-radius: 5px;
 }
 
-h1 {
+header h1 {
     font-weight: bold;
     margin: 0;
     font-family: sans-serif;
 }
 
-h2 {
+header h2 {
     margin: 0;
     font-style: italic;
 }
@@ -29,6 +29,27 @@ main {
     background-color: #d9cab7;
     padding: 20px;
     border-radius: 5px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form input[type="text"]{
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    width: 10%;
+    box-sizing: border-box;
+}
+
+form input[type="file"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    width: 10%;
 }
 
 ul {
@@ -81,4 +102,18 @@ li {
     border: 1px solid #f5c6cb;
     border-radius: 4px;
     margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
