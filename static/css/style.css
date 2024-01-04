@@ -52,6 +52,14 @@ form input[type="file"] {
     width: 10%;
 }
 
+form input[type="password"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    width: 15%;
+}
+
 ul {
     list-style: none;
     padding: 0;
