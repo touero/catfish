@@ -19,7 +19,7 @@
     <main>
         <form method="post" enctype="multipart/form-data" action="{% url 'upload_file' %}">
             {% csrf_token %}
-            <input type="text" name="authorization_code" placeholder="Enter Authorization Code" required>
+            <input type="password" name="authorization_code" placeholder="Enter Authorization Code" required>
             <input type="file" name="file">
             <button type="submit">Upload</button>
         </form>
