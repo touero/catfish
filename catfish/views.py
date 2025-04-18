@@ -21,7 +21,7 @@ class ListFilesView(View):
         for file in sorted_files:
             file_dict[file] = datetime.fromtimestamp(os.path.getmtime(os.path.join(media_path, file))).strftime(
                 "%Y-%m-%d %H:%M:%S")
-        return render(request, 'download.html', {'file_dict': file_dict})
+        return render(request, 'index.html', {'file_dict': file_dict})
 
 
 class DownloadFileView(View):
@@ -67,4 +67,4 @@ class UploadFileView(View):
             fs.save(uploaded_file.name, uploaded_file)
             return redirect('list_files')
 
-        return render(request, 'download.html')
+        return render(request, 'index.html')
