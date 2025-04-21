@@ -13,15 +13,7 @@
     <div class="container-sm">
         <div class="col">
             <h1 style="text-align: center">Download Center</h1>
-            <br>
-            <!--
-            <form method="post" enctype="multipart/form-data" action="{% url 'upload_file' %}">
-                {% csrf_token %}
-                <input type="password" name="authorization_code" placeholder="Enter Authorization Code" required>
-                <input type="file" name="file">
-                <button type="submit">Upload</button>
-            </form>
-            -->
+            <hr>
 
             {% for key, value in file_dict.items %}
             <div class="card mb-3">
@@ -29,16 +21,19 @@
                     Who Upload
                 </div>
                 <div class="card-body">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                      <h5 class="card-title">{{ key }}</h5>
-                      <p class="card-text">file description</p>
+                    <div class="d-flex align-items-center justify-content-between" style="gap: 30px;">
+                        <div>
+                            <h5 class="card-title" style="word-wrap: break-word; word-break: break-all;">{{ key }}</h5>
+                            <p class="card-text">file description</p>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <form method="post" action="{% url 'delete_file' filename=key %}" style="display:inline;">
+                            {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <a class="btn btn-primary" href="{% url 'download_file' filename=key %}">Download</a>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-end gap-2">
-                      <a class="btn btn-danger" href="">Delete</a>
-                      <a class="btn btn-primary" href="{% url 'download_file' filename=key %}">Download</a>
-                    </div>
-                  </div>
                 </div>
                 <div class="card-footer text-body-secondary">{{ value }}</div>
             </div>
@@ -46,6 +41,5 @@
             <div id="customAlert" class="alert-style" style="display: none;"></div>
         </div>
     </div>
-
 </body>
 </html>

@@ -7,6 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import FileResponse, HttpResponseForbidden
 from django.views import View
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.conf import settings
 from django.http import Http404
 from datetime import datetime
@@ -52,6 +53,19 @@ class DownloadFileView(View):
             return response
         else:
             raise Http404("File not found.")
+
+
+class DeleteFileView(View):
+    def post(self, request, filename):
+        decoded_filename = urllib.parse.unquote(filename)
+        safe_base = Path(settings.SHOW_DIR).resolve()
+        requested_path = (safe_base / decoded_filename).resolve()
+
+        if not str(requested_path).startswith(str(safe_base)) or not requested_path.exists():
+            raise Http404("Invalid file path.")
+
+        requested_path.unlink()
+        return redirect('list_files')
 
 
 class UploadFileView(View):
