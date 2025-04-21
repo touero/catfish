@@ -13,6 +13,17 @@
     <div class="container-sm">
         <div class="col">
             <h1 style="text-align: center">Download Center</h1>
+            {% if user.is_authenticated %}
+                <div class="d-flex align-items-center">
+                    <span class="me-3">Hello, {{ user.username }}!</span>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning">Logout</button>
+                    </form>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm">Login</a>
+            {% endif %}
             <hr>
 
             {% for key, value in file_dict.items %}
@@ -27,10 +38,14 @@
                             <p class="card-text">file description</p>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                            <form method="post" action="{% url 'delete_file' filename=key %}" style="display:inline;">
-                            {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            {% if can_delete %}
+                                <form method="post" action="{% url 'delete_file' filename=key %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            {% else %}
+                                <button class="btn btn-danger" disabled>Delete</button>
+                            {% endif %}
                             <a class="btn btn-primary" href="{% url 'download_file' filename=key %}">Download</a>
                         </div>
                     </div>
