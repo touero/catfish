@@ -152,9 +152,11 @@ LOGGING = {
         },
         'file': {
             'level': 'INFO',
-            'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
             'filename': f'{LOG_DIR}/catfish.log',
             'formatter': 'verbose',
+            'maxBytes': 10485760,
+            'backupCount': 5,
         },
     },
     'loggers': {

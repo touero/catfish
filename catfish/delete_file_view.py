@@ -21,7 +21,10 @@ class DeleteFileView(View):
 
         if not str(requested_path).startswith(str(safe_base)) or not requested_path.exists():
             raise Http404("Invalid file path.")
-
-        requested_path.unlink()
-        return redirect('list_files')
+        try:
+            requested_path.unlink()
+            return redirect('list_files')
+        except OSError as error:
+            logger.exception("删除文件失败: %s", requested_path, exc_info=error)
+            raise Http404("Invalid file path.")
 

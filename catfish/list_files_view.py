@@ -15,14 +15,18 @@ class ListFilesView(View):
     @staticmethod
     def get(request):
         show_dir = Path(settings.SHOW_DIR)
-        file_dict = {}
+        file_data = []
 
         for path in show_dir.rglob('*'):
             if path.is_file():
                 relative_path = path.relative_to(show_dir).as_posix()
-                mod_time = datetime.fromtimestamp(path.stat().st_mtime).strftime("%Y-%m-%d %H:%M:%S")
-                file_dict[relative_path] = mod_time
+                file_stat = path.stat()
+                file_mtime = file_stat.st_mtime
+                mod_time_str = datetime.fromtimestamp(file_mtime).strftime("%Y-%m-%d %H:%M:%S")
+                file_data.append((relative_path, mod_time_str, file_mtime))
 
-        sorted_file_dict = dict(sorted(file_dict.items(), key=lambda item: (show_dir / item[0]).stat().st_mtime, reverse=True))
+        sorted_file_dict = {
+            rel: mod for rel, mod, _ in sorted(file_data, key=lambda item: item[2], reverse=True)
+        }
 
         return render(request, 'index.html', {'file_dict': sorted_file_dict})
