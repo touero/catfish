@@ -125,8 +125,57 @@ STATICFILES_DIRS = [
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+# settings for catfish show dir
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SHOW_DIR = os.path.join(os.path.expanduser("~"), 'Downloads')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+os.makedirs(LOG_DIR, exist_ok=True)
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',  # 设置控制台输出格式
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': f'{LOG_DIR}/catfish.log',
+            'formatter': 'verbose',
+            'maxBytes': 10485760,
+            'backupCount': 5,
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,  # 向父 logger 传播日志
+        },
+        # 你的自定义 logger 配置
+        'catfish': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,  # 不传播到父 logger
+        },
+        # 默认使用根 logger 配置
+        '__name__': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}

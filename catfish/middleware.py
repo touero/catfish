@@ -1,6 +1,8 @@
+import logging
 import time
-from easierdocker import log
 from django.http import HttpResponseForbidden
+
+logger = logging.getLogger(__name__)
 
 
 class CatfishMiddleware:
@@ -11,18 +13,14 @@ class CatfishMiddleware:
     def __call__(self, request):
         user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
         ip_address = request.META.get('REMOTE_ADDR')
-        log(f'[{ip_address}]: {user_agent}')
-        response = self.get_response(request)
+
+        logger.info(f'[{ip_address}]: {user_agent}')
+
         if request.method != 'GET':
-            return response
+            return self.get_response(request)
+
         if 'mozilla' not in user_agent:
             return HttpResponseForbidden("Forbidden: Bad User-Agent")
-        if ip_address in self.requests:
-            last_request_time = self.requests[ip_address]
-            elapsed_time = time.time() - last_request_time
-            if elapsed_time < 2:
-                return HttpResponseForbidden("Forbidden: Too many requests from this IP")
-        self.requests[ip_address] = time.time()
 
         response = self.get_response(request)
         return response

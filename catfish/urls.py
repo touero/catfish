@@ -1,10 +1,12 @@
 # your_app/urls.py
 
 from django.urls import path
-from .views import ListFilesView, DownloadFileView, UploadFileView
+from .list_files_view import ListFilesView
+from .delete_file_view import DeleteFileView
+from .download_file_view import DownloadFileView
 
 urlpatterns = [
     path('', ListFilesView.as_view(), name='list_files'),
-    path('download/<str:filename>/', DownloadFileView.as_view(), name='download_file'),
-    path('upload/', UploadFileView.as_view(), name='upload_file'),
+    path('delete/<path:filename>/', DeleteFileView.as_view(), name='delete_file'),
+    path('download/<path:filename>', DownloadFileView.as_view(), name='download_file'),
 ]

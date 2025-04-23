@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+    <title>Download Center</title>
+
+</head>
+<body>
+    <div class="container-sm">
+        <div class="col">
+            <h1 style="text-align: center">Download Center</h1>
+            <hr>
+
+            {% for key, value in file_dict.items %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    Who Upload
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between" style="gap: 30px;">
+                        <div>
+                            <h5 class="card-title" style="word-wrap: break-word; word-break: break-all;">{{ key }}</h5>
+                            <p class="card-text">file description</p>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <form method="post" action="{% url 'delete_file' filename=key %}" style="display:inline;">
+                            {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <a class="btn btn-primary" href="{% url 'download_file' filename=key %}">Download</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-body-secondary">{{ value }}</div>
+            </div>
+            {% endfor %}
+            <div id="customAlert" class="alert-style" style="display: none;"></div>
+        </div>
+    </div>
+</body>
+</html>
