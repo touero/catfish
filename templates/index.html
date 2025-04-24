@@ -14,9 +14,22 @@
         <div class="col">
             <h1 style="text-align: center">Download Center</h1>
             {% if user.is_authenticated %}
-                <div class="d-flex align-items-center">
-                    <span class="me-3">Hello, {{ user.username }}!</span>
-                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                <div class="d-flex align-items-center justify-content-end">
+                    <span class="d-inline-flex align-items-center gap-2 px-3 rounded border ms-3"
+                            style="height: calc(1.5em + 0.75rem + 2px);
+                                    padding-top: 0.375rem; 
+                                    padding-bottom: 0.375rem; 
+                                    border: 1px solid var(--bs-success-border-subtle); 
+                                    background-color: var(--bs-light-bg-subtle); 
+                                    color: var(--bs-body-color); 
+                                    font-size: 1rem; 
+                                    line-height: 1.5;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                        Hello, {{ user.username }}
+                    </span>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;" class="ms-3">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-warning">Logout</button>
                     </form>

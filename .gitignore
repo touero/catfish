@@ -3,3 +3,6 @@ venv/
 .idea/
 .DS_store
 __pycache__/
+logs/
+db.sqlite3
+migrations/
