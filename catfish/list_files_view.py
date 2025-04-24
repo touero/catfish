@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class ListFilesView(View):
     @staticmethod
     def get(request):
-        show_dir = Path(settings.SHOW_DIR)
+        show_dir = Path(settings.MEDIA_ROOT)
         file_dict = {}
 
         for path in show_dir.rglob('*'):

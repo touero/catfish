@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
 
 # settings for catfish show dir
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-SHOW_DIR = os.path.join(os.path.expanduser("~"), 'Downloads')
+MEDIA_ROOT = os.path.join(os.path.expanduser("~"), 'Downloads')
 
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 os.makedirs(LOG_DIR, exist_ok=True)

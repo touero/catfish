@@ -16,8 +16,7 @@ class DeleteFileView(PermissionRequiredMixin, View):
         decoded_filename = urllib.parse.unquote(filename)
         logger.info(f"will delete file: {decoded_filename}")
 
-        #
-        safe_base = Path(settings.SHOW_DIR).resolve()
+        safe_base = Path(settings.MEDIA_ROOT).resolve()
         requested_path = (safe_base / decoded_filename).resolve()
 
         if not str(requested_path).startswith(str(safe_base)) or not requested_path.exists():

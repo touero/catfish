@@ -7,6 +7,7 @@ from .list_files_view import ListFilesView
 from .delete_file_view import DeleteFileView
 from .download_file_view import DownloadFileView
 from .login_view import LoginView
+from .upload_file_view import UploadFileView
 
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     path('', ListFilesView.as_view(), name='list_files'),
     path('delete/<path:filename>/', DeleteFileView.as_view(), name='delete_file'),
     path('download/<path:filename>', DownloadFileView.as_view(), name='download_file'),
+    path('upload/', UploadFileView.as_view(), name='upload_file'),
 ]
