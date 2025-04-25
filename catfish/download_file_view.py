@@ -17,7 +17,7 @@ class DownloadFileView(View):
 
         safe_base = Path(settings.SHOW_DIR).resolve()
         requested_path = (safe_base / decoded_filename).resolve()
-
+ 
         if not str(requested_path).startswith(str(safe_base)):
             raise Http404("Invalid file path.")
 

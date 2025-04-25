@@ -10,7 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 
+
 logger = logging.getLogger(__name__)
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -19,6 +21,7 @@ class ListFilesView(View):
     def get(request):
         show_dir = Path(settings.SHOW_DIR)
         file_dict = {}
+
 
         for path in show_dir.rglob('*'):
             if path.is_file():
