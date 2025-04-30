@@ -14,45 +14,97 @@
         <div class="col">
             <h1 style="text-align: center">Download Center</h1>
             {% if user.is_authenticated %}
-                <div class="d-flex align-items-center">
-                    <span class="me-3">Hello, {{ user.username }}!</span>
-                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                            <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                        </svg>
+                        上传文件
+                    </button>
+                    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form class="modal-content" method="post" enctype="multipart/form-data" action="{% url 'upload_file' %}">
+                                {% csrf_token %}
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="uploadModalLabel">上传文件</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                                </div>
+                                <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="fileInput" class="form-label">选择文件</label>
+                                    <input class="form-control" type="file" id="fileInput" name="file">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">文件描述</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="请输入描述..."></textarea>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary">提交上传</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="d-inline-flex align-items-center gap-2 px-3 rounded border ms-3"
+                            style="height: calc(1.5em + 0.75rem + 2px);
+                                    padding-top: 0.375rem; 
+                                    padding-bottom: 0.375rem; 
+                                    border: 1px solid var(--bs-success-border-subtle); 
+                                    background-color: var(--bs-warning-bg-subtle); 
+                                    color: var(--bs-body-color); 
+                                    font-size: 1rem; 
+                                    line-height: 1.5;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                        Hello, {{ user.username }}
+                    </span>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;" class="ms-3">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-warning">Logout</button>
+                        <button type="submit" class="btn btn-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-escape" viewBox="0 0 16 16">
+                                <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02"/>
+                                <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732z"/>
+                            </svg>
+                            Logout
+                        </button>
                     </form>
                 </div>
             {% else %}
                 <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm">Login</a>
             {% endif %}
-
-            <hr>
+            <hr class="border border-primary border-3 opacity-75">
 
             {% for key, value in file_dict.items %}
-            <div class="card mb-3">
-                <div class="card-header">
-                    Who Upload
-                </div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between" style="gap: 30px;">
-                        <div>
-                            <h5 class="card-title" style="word-wrap: break-word; word-break: break-all;">{{ key }}</h5>
-                            <p class="card-text">file description</p>
-                        </div>
-                        <div class="d-flex justify-content-end gap-2">
-                            {% if can_delete %}
-                                <form method="post" action="{% url 'delete_file' filename=key %}" style="display:inline;">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            {% else %}
-                                <button class="btn btn-danger" disabled>Delete</button>
-                            {% endif %}
-                            <a class="btn btn-primary" href="{% url 'download_file' filename=key %}">Download</a>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ value.uploaded_by }}
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between" style="gap: 30px;">
+                            <div>
+                                <h5 class="card-title" style="word-wrap: break-word; word-break: break-all;">{{ key }}</h5>
+                                <p class="card-text">{{ value.description }}</p>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2">
+                                {% if can_delete %}
+                                    <form method="post" action="{% url 'delete_file' filename=key %}" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                {% else %}
+                                    <button class="btn btn-danger" disabled>Delete</button>
+                                {% endif %}
+                                <a class="btn btn-primary" href="{% url 'download_file' filename=key %}">Download</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="card-footer text-body-secondary">
+                        {{ value.uploaded_at }}
+                    </div>
                 </div>
-                <div class="card-footer text-body-secondary">{{ value }}</div>
-            </div>
             {% endfor %}
             <div id="customAlert" class="alert-style" style="display: none;"></div>
         </div>
