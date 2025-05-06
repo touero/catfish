@@ -16,7 +16,7 @@ An easy-to-learn, lightweight, easy-to-deploy, download web page based on Django
 ![login_preview](https://github.com/touero/catfish/blob/master/static/image/login.png)
 ![index_preview](https://github.com/touero/catfish/blob/master/static/image/index.png)  
 
-[Click here to check the web vedio](https://github.com/touero/catfish/blob/master/static/image/vedio.webm)
+[Click here to check the web video](https://github.com/touero/catfish/blob/master/static/image/video.webm)
 
 ## Install
 
@@ -30,7 +30,7 @@ Create virtual environment installation dependencies
 ```shell
 python -m venv .venv && 
 source ./venv/bin/activate && 
-pip install -r requriements.txt
+pip install -r requirements.txt
 ```
 ## Usage
 ```shell
