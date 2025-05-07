@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3*5p*%7u8w40%&(-r_!oc-9_2rbwwtt%%^hq(!3*(3)ik1jysi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -151,7 +151,7 @@ LOGGING = {
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',  # 设置控制台输出格式
+            'formatter': 'verbose',
         },
         'file': {
             'level': 'INFO',
@@ -164,15 +164,13 @@ LOGGING = {
         'django': {
             'handlers': ['console', 'file'],
             'level': 'INFO',
-            'propagate': True,  # 向父 logger 传播日志
+            'propagate': True,
         },
-        # 你的自定义 logger 配置
         'catfish': {
             'handlers': ['console', 'file'],
             'level': 'INFO',
-            'propagate': False,  # 不传播到父 logger
+            'propagate': False,
         },
-        # 默认使用根 logger 配置
         '__name__': {
             'handlers': ['console', 'file'],
             'level': 'INFO',
